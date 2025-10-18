@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'http://localhost:5000/api', // <-- Ensure this matches your Node.js port
+    baseURL: 'https://saarathi.onrender.com/api', // <-- Ensure this matches your Node.js port
     headers: {
         'Content-Type': 'application/json',
     }
