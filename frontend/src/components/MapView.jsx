@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -40,10 +39,10 @@ export default function MapView({ projects = [], center = [21.1458, 79.0882], zo
             scrollWheelZoom={true}
             className="h-[60vh] w-full rounded-xl z-0 border border-gray-700"
         >
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors'
-                url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-            />
+<TileLayer
+    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors &copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+    url={`https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=8717168f-6f30-47a0-b50e-3007b677846b`}
+/>
             
             {projects.map(p => {
                 if (!p.latitude || !p.longitude) return null;
