@@ -134,8 +134,7 @@ export default function Login() {
                                 className="w-full p-2.5 bg-gray-700 border border-gray-600 rounded-lg text-dark-text focus:ring-accent-blue focus:border-accent-blue"
                             >
                                 <option value="officer">Field Officer (Project Submission)</option>
-                                <option value="admin">Admin (Oversight/Approvals)</option>
-                                {/* Public role is typically read-only, thus no signup needed */}
+                                <option value="admin">Admin (Approvals)</option>
                             </select>
                         </div>
                     )}

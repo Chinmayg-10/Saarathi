@@ -5,18 +5,26 @@ const db = require('../db');
 require('dotenv').config();
 
 const router = express.Router();
-const SALT_ROUNDS = 10;
+const SALT_ROUNDS = 12;
 
 router.post('/signup', async (req, res) => {
   const { name, email, password, role } = req.body;
-  if (!name || !email || !password || !role) return res.status(400).json({ error: 'Missing fields' });
+  if (!name || !email || !password || !role)
+    return res.status(400).json({ error: 'Missing fields' });
+
   try {
     const hashed = await bcrypt.hash(password, SALT_ROUNDS);
     const result = await db.query(
       'INSERT INTO users (name, email, password, role) VALUES ($1,$2,$3,$4) RETURNING id,name,email,role',
       [name, email, hashed, role]
     );
-    res.json({ user: result.rows[0] });
+
+    const user = result.rows[0];
+
+    const token = jwt.sign({ id: user.id, role: user.role },process.env.JWT_SECRET, { expiresIn: '7d' });
+
+    res.json({ user, token });
+
   } catch (err) {
     console.error(err);
     if (err.code === '23505') return res.status(400).json({ error: 'Email already exists' });
